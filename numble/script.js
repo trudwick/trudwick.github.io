@@ -9,9 +9,9 @@ var dispStrs = {}
 
 //build the initial numbers
 function buildNums(){
-  let defVals = [4,6,25,50,75,100]
-  // let defVals = [0,0,0,0,0,0]
-  let goalInit = 350
+  // let defVals = [4,6,25,50,75,100]
+  let defVals = [0,0,0,0,0,0]
+  let goalInit = 0;//350
   for(let i=0; i<6; i++){
     inp = document.createElement('input')
     inp.type='number'
