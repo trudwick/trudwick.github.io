@@ -121,7 +121,7 @@ function find(nums,goal,build_up, cur_ans){
     else
       nextBuildStr = build_up+"/"+cur_num
     nextAns = cur_ans/cur_num
-    find( nums,goal,build_up_tmp,nextAns)
+    find( nums,goal,nextBuildStr,nextAns)
 
     //put cur_num back in the array so we can use it in future recurrings
     nums[z]=cur_num;
