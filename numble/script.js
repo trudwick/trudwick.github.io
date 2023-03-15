@@ -9,16 +9,17 @@ var dispStrs = {}
 
 //build the initial numbers
 function buildNums(){
-  // let defVals = [4,6,25,50,75,100]
-  let defVals = [0,0,0,0,0,0]
-  let goalInit = 0;//350
+  let defVals = [2,4,9,10,25,100]
+  let goalInit = 228
   for(let i=0; i<6; i++){
     inp = document.createElement('input')
     inp.type='number'
     $('#nums').append(inp)
     inp.classList.add("numinp");
     inp.classList.add("text-secondary");
-    inp.value = defVals[i]
+    if(i< defVals.length )
+      inp.value = defVals[i]
+
   }
   $("#goal").val(goalInit)
 }
@@ -72,40 +73,45 @@ function solve(nums,goal){
     fullSolutions[z]=[]
   }
   // console.log(goal)
+  var true_table=[-1,-1,-1,-1,-1,-1]
   for(let z=0; z<6; z++){
     let prev = nums[z]
-    nums[z]=null
-    find(nums,goal,prev.toString(),prev)
+    true_table[z]=0
+    find(nums,goal,prev.toString(),prev, true_table,1)
+    true_table[z]=-1
   }
 }
 
 //Recursively run each operation.
-function find(nums,goal,build_up, cur_ans){
+function find(nums,goal,build_up, cur_ans, true_table, numberOrder){
   //if we found it, save it and quit
-  let numNonNulls=numNums(nums);
+  // if (true_table[1]==0)
+  //   console.log(nums,build_up,goal,cur_ans,true_table,numberOrder)
+  let numNonNulls=numNums(true_table);
   if (goal==cur_ans){
-    const ct = (6-numNonNulls)
-    fullSolutions[ct].push(build_up)
-    return;
+    console.log("YAY",build_up)
+    // const ct = (6-numNonNulls)
+    fullSolutions[numNonNulls].push(build_up)
+    // return;
   }
 
   for (let z=0; z<nums.length; z++){
     //make sure this number is there
-    if(nums[z]==null){
+    if(true_table[z]!=-1){
       continue;
     }
     //save current number (to repopulate later), then null it out.
     const cur_num = nums[z]
-    nums[z]=null;
+    true_table[z]=numberOrder;
     
     //same logic for each: build the string, calculate the answer, and recur
     let nextBuildStr = build_up+"+"+cur_num
     let nextAns = cur_ans+cur_num
-    find( nums,goal,nextBuildStr,nextAns)
+    find( nums,goal,nextBuildStr,nextAns,true_table,numberOrder+1)
 
     nextBuildStr = build_up+"-"+cur_num
     nextAns = cur_ans-cur_num
-    find( nums,goal,nextBuildStr,nextAns)
+    find( nums,goal,nextBuildStr,nextAns,true_table,numberOrder+1)
 
     let hasOper = build_up.includes("+") || build_up.includes("-");
     if (hasOper)
@@ -113,7 +119,7 @@ function find(nums,goal,build_up, cur_ans){
     else
       nextBuildStr = build_up+"*"+cur_num
     nextAns = cur_ans*cur_num
-    find( nums,goal,nextBuildStr,nextAns)
+    find( nums,goal,nextBuildStr,nextAns,true_table,numberOrder+1)
 
 
     if (hasOper)
@@ -121,10 +127,10 @@ function find(nums,goal,build_up, cur_ans){
     else
       nextBuildStr = build_up+"/"+cur_num
     nextAns = cur_ans/cur_num
-    find( nums,goal,nextBuildStr,nextAns)
+    find( nums,goal,nextBuildStr,nextAns,true_table,numberOrder+1)
 
     //put cur_num back in the array so we can use it in future recurrings
-    nums[z]=cur_num;
+    true_table[z]=-1;
   }
 }
 
@@ -132,7 +138,7 @@ function find(nums,goal,build_up, cur_ans){
 function numNums(arr){
   let n = 0;
   for(let z=0; z<arr.length; z++){
-    if(arr[z]!=null){
+    if(arr[z]!=-1){
       n++;
     }
   }

@@ -12,15 +12,17 @@
 <body>
 	<div id='nums'>Numbers:</div>
 	<div class='goalb'>GOAL:<input type='number' id='goal'></div>
-	<div>
-		<label><input type="checkbox" class="radio" value="0" name="fooby[1][]" checked/>Possible Perfect?</label>
-		<label><input type="checkbox" class="radio" value="1" name="fooby[1][]"/>Total Solutions</label>
-		<label><input type="checkbox" class="radio" value="2" name="fooby[1][]"/>Total Perfect</label>
-		<label><input type="checkbox" class="radio" value="3" name="fooby[1][]" />Solutions by Number Count</label>
-		<label><input type="checkbox" class="radio" value="4" name="fooby[1][]" />Show OOPs (No Numbers)</label>
-		<label><input type="checkbox" class="radio" value="5" name="fooby[1][]" />Full Solutions</label>
+	<div><button class='btn btn-primary btn-lg calc' onclick = 'clicked()'>Calculate</button></div>
+
+	<div class='calc'>
+		<label><input type="checkbox" class="radio" placeholder=0 value="0" name="fooby[1][]" checked/>Possible Perfect?</label>
+		<label><input type="checkbox" class="radio" placeholder=0 value="1" name="fooby[1][]"/>Total Solutions</label>
+		<label><input type="checkbox" class="radio" placeholder=0 value="2" name="fooby[1][]"/>Total Perfect</label>
+		<label><input type="checkbox" class="radio" placeholder=0 value="3" name="fooby[1][]" />Solutions by Number Count</label>
+		<label><input type="checkbox" class="radio" placeholder=0 value="4" name="fooby[1][]" />Show OOPs (No Numbers)</label>
+		<label><input type="checkbox" class="radio" placeholder=0 value="5" name="fooby[1][]" />Full Solutions</label>
 	</div>
-	<div><button onclick = 'clicked()'>Calculate</button></div>
+	
 	<div id='out'></div>
 </body>
 </html>
