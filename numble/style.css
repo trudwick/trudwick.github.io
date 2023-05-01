@@ -16,13 +16,13 @@ div{
   width: 80px;
 }
 input[type=number]{
-  text-align: center;
+  text-align: center;;
 }
 #goal{
   font-size: 30px;
 }
 .numinp{
-  text-secondary:red;
+  font-size: 15px;
 }
 .goalb{
   padding:10px;
